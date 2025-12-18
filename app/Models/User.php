@@ -17,6 +17,15 @@ class User extends Authenticatable
         'role_id',
     ];
 
+    public function isAdminPrincipal(): bool
+    {
+        return $this->role === 'admin_principal';
+    }
+
+    public function isAdminSecundario(): bool
+    {
+        return $this->role === 'admin_secundario';
+    }
     protected $hidden = [
         'password',
         'remember_token',
@@ -42,15 +51,4 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    /* HELPERS */
-
-    public function isAdminPrincipal(): bool
-    {
-        return $this->role?->name === 'admin_principal';
-    }
-
-    public function isAdminSecundario(): bool
-    {
-        return $this->role?->name === 'admin_secundario';
-    }
 }
