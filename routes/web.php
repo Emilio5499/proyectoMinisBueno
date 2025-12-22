@@ -17,3 +17,19 @@ Route::middleware(['auth', 'role:admin_secundario'])->group(function () {
         return 'Panel Pintor';
     });
 });
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::middleware('role:admin_principal')->group(function () {
+        Route::get('/admin/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+    });
+
+    Route::middleware('role:admin_secundario')->group(function () {
+        Route::get('/painter/dashboard', function () {
+            return view('painter.dashboard');
+        })->name('painter.dashboard');
+    });
+
+});
