@@ -30,6 +30,10 @@
         </nav>
     </aside>
 
+    @if(auth()->user()->isAdminPrincipal())
+        <a href="{{ route('admin.products.index') }}">Productos</a>
+    @endif
+
     <!-- Main content -->
     <main class="flex-1 p-6">
         @yield('content')
