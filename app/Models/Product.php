@@ -26,4 +26,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductPaintOption::class);
     }
+
+    public function paintedOption()
+    {
+        return $this->hasOne(ProductPainted::class);
+    }
+
 }
