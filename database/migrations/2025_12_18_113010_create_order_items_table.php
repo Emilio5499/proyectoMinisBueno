@@ -13,12 +13,28 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->integer('quantity');
-            $table->decimal('price', 8, 2);
+
+            $table->foreignId('order_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('product_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->string('product_name');
+            $table->decimal('unit_price', 8, 2);
+
+            $table->boolean('is_painted')->default(false);
+            $table->decimal('paint_extra_price', 8, 2)->default(0);
+
+            $table->integer('quantity')->default(1);
+
+            $table->decimal('subtotal', 10, 2);
+
             $table->timestamps();
         });
+
     }
 
     /**
