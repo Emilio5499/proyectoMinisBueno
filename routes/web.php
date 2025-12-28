@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPaintedController;
@@ -23,6 +24,13 @@ Route::middleware('auth')->get('/dashboard', function () {
     abort(403);
 })->name('dashboard');
 
+Route::middleware(['auth', 'role:admin_principal'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::resource('users', UserController::class);
+    });
 
 Route::middleware(['auth', 'role:admin_principal'])
     ->prefix('admin')
